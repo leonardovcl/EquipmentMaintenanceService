@@ -1,13 +1,53 @@
 package dev.leonardovcl.equipmentMaintenanceService.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class Equipment {
 
+	@Id
+    @Column(name = "serviceOrder_id")
+    private Long id;
+	
+	@OneToOne
+	@MapsId
+    @JoinColumn(name = "serviceOrder_id")
+	@NotNull(message = "Must not be Null!")
+	private ServiceOrder serviceOrder;
+	
+	@NotEmpty(message = "Must not be Empty!")
 	private String type;
 	
+	@NotEmpty(message = "Must not be Empty!")
 	private String brand;
+	
+	private String observations;
 
 	public Equipment() {
 		
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public ServiceOrder getServiceOrder() {
+		return serviceOrder;
+	}
+
+	public void setServiceOrder(ServiceOrder serviceOrder) {
+		this.serviceOrder = serviceOrder;
 	}
 
 	public String getType() {
@@ -25,6 +65,12 @@ public class Equipment {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	
-	
+
+	public String getObservations() {
+		return observations;
+	}
+
+	public void setObservations(String observations) {
+		this.observations = observations;
+	}	
 }
