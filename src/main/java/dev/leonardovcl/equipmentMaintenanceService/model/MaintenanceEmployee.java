@@ -1,11 +1,14 @@
 package dev.leonardovcl.equipmentMaintenanceService.model;
 
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +24,9 @@ public class MaintenanceEmployee {
 	
 	@NotNull(message = "Must not be Null!")
 	private Position position;
+	
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	private List<Status> statusSigned;
 	
 	public enum Position {
 		LEADER, PRINCIPAL, ASSISTANT
