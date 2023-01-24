@@ -48,7 +48,13 @@ public class ServiceOrder {
 		this.problemDescription = problemDescription;
 	}
 
-
+	public ServiceOrder(Long id, Customer customer, Equipment equipment, List<Status> statusLog, String problemDescription) {
+		this.id = id;
+		this.customer = customer;
+		this.equipment = equipment;
+		this.statusLog = statusLog;
+		this.problemDescription = problemDescription;
+	}
 
 	public Long getId() {
 		return id;
