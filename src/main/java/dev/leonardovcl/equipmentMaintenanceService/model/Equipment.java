@@ -7,7 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Equipment {
@@ -19,7 +18,7 @@ public class Equipment {
 	@OneToOne
 	@MapsId
     @JoinColumn(name = "serviceOrder_id")
-	@NotNull(message = "Must not be Null!")
+//	@NotNull(message = "Must not be Null!")
 	private ServiceOrder serviceOrder;
 	
 	@NotEmpty(message = "Must not be Empty!")
@@ -34,6 +33,12 @@ public class Equipment {
 		
 	}
 	
+	public Equipment(Long id, String type, String brand) {
+		this.id = id;
+		this.type = type;
+		this.brand = brand;
+	}
+
 	public Long getId() {
 		return id;
 	}

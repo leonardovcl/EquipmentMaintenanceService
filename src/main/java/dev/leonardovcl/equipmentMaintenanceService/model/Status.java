@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Status {
 
@@ -16,7 +18,8 @@ public class Status {
     private Long id;
 	
 	@ManyToOne
-	@NotNull(message = "Must not be Null!")
+	@JsonIgnore
+//	@NotNull(message = "Must not be Null!")
 	private ServiceOrder serviceOrder;
 	
 	@ManyToOne
@@ -35,6 +38,14 @@ public class Status {
 
 	public Status() {
 		
+	}
+	
+	public Status(Long id, ServiceOrder serviceOrder, MaintenanceEmployee employee, Stage stage, String description) {
+		this.id = id;
+		this.serviceOrder = serviceOrder;
+		this.employee = employee;
+		this.stage = stage;
+		this.description = description;
 	}
 
 	public Long getId() {
