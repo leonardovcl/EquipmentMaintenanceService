@@ -208,6 +208,574 @@ Há uma live version da API que pode ser acessada pela url:
 
       curl -X DELETE localhost:8080/employees/<id>
 </details>
+	
+<details>
+	<summary>Ordens de Serviço Endpoint</summary>
+    
+- Obter lista de Ordens de Serviço cadastradas:
+
+      curl localhost:8080/serviceOrders
+      
+##### Modelo de Resposta:
+      
+```json
+[{
+    "id": 1,
+    "customer": {
+        "id": 1,
+        "name": "Adriana V.",
+        "email": "adrianav@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 01, n. 277"
+    },
+    "equipment": {
+        "id": 1,
+        "type": "Compressor de Ar",
+        "brand": "Vonder",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 1,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 2,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Testes de vazamentos falharam, iniciando reparos na lataria"
+    }, {
+        "id": 3,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "FINISHED",
+        "description": "Reparo finalizado, Equipamento em funcionamento normal"
+    }],
+    "problemDescription": "Equipamento nao esta conseguindo realizar a compressao"
+}, {
+    "id": 2,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 2,
+        "type": "Esmerilhadeira Angular",
+        "brand": "Bosh",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 4,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 5,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Testes de circuitos eletronicos falharam"
+    }, {
+        "id": 6,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "ONHOLD",
+        "description": "Aguardando chegada de capacitor para substituicao, estimativa: 3 dias"
+    }],
+    "problemDescription": "Equipamento nao liga"
+}, {
+    "id": 3,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 3,
+        "type": "Furadeira",
+        "brand": "Black&Decker",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 7,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 8,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Danos irreparáveis na estrutura plastica"
+    }, {
+        "id": 9,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "ONHOLD",
+        "description": "Aguardando chegada de nova carcaca, estimativa: 1 dia"
+    }, {
+        "id": 10,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RESUMED",
+        "description": "Realizando substituicao da carcaca plastica"
+    }],
+    "problemDescription": "Equipamento com avarias na carcaca"
+}]
+```
+
+- Obter Ordens de Serviço por Id:
+
+      curl localhost:8080/serviceOrders/<id>
+      
+##### Modelo de Resposta (``<id>`` = 1):
+      
+```json
+{
+    "id": 1,
+    "customer": {
+        "id": 1,
+        "name": "Adriana V.",
+        "email": "adrianav@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 01, n. 277"
+    },
+    "equipment": {
+        "id": 1,
+        "type": "Compressor de Ar",
+        "brand": "Vonder",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 1,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 2,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Testes de vazamentos falharam, iniciando reparos na lataria"
+    }, {
+        "id": 3,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "FINISHED",
+        "description": "Reparo finalizado, Equipamento em funcionamento normal"
+    }],
+    "problemDescription": "Equipamento nao esta conseguindo realizar a compressao"
+}
+```
+
+- Obter Ordens de Serviço por Id do Cliente:
+
+      curl localhost:8080/serviceOrders/customer/<id>
+      
+##### Modelo de Resposta (``<id>`` = 2):
+      
+```json
+[{
+    "id": 2,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 2,
+        "type": "Esmerilhadeira Angular",
+        "brand": "Bosh",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 4,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 5,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Testes de circuitos eletronicos falharam"
+    }, {
+        "id": 6,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "ONHOLD",
+        "description": "Aguardando chegada de capacitor para substituicao, estimativa: 3 dias"
+    }],
+    "problemDescription": "Equipamento nao liga"
+}, {
+    "id": 3,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 3,
+        "type": "Furadeira",
+        "brand": "Black&Decker",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 7,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 8,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Danos irreparáveis na estrutura plastica"
+    }, {
+        "id": 9,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "ONHOLD",
+        "description": "Aguardando chegada de nova carcaca, estimativa: 1 dia"
+    }, {
+        "id": 10,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RESUMED",
+        "description": "Realizando substituicao da carcaca plastica"
+    }],
+    "problemDescription": "Equipamento com avarias na carcaca"
+}]
+```
+
+- Obter Ordens de Serviço por estágio do serviço:
+
+      curl localhost:8080/serviceOrders/stage?stageName=<stage>
+      
+##### Modelo de Resposta (``<stage>`` = onhold):
+      
+```json
+[{
+    "id": 2,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 2,
+        "type": "Esmerilhadeira Angular",
+        "brand": "Bosh",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 4,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 5,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Testes de circuitos eletronicos falharam"
+    }, {
+        "id": 6,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "ONHOLD",
+        "description": "Aguardando chegada de capacitor para substituicao, estimativa: 3 dias"
+    }],
+    "problemDescription": "Equipamento nao liga"
+}]
+```
+
+- Obter Ordens de Serviço pendentes:
+
+      curl localhost:8080/serviceOrders/pending
+      
+##### Modelo de Resposta (``<stage>`` = onhold):
+      
+```json
+[{
+    "id": 2,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 2,
+        "type": "Esmerilhadeira Angular",
+        "brand": "Bosh",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 4,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 5,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Testes de circuitos eletronicos falharam"
+    }, {
+        "id": 6,
+        "employee": {
+            "id": 2,
+            "name": "Paulo H. J.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "ONHOLD",
+        "description": "Aguardando chegada de capacitor para substituicao, estimativa: 3 dias"
+    }],
+    "problemDescription": "Equipamento nao liga"
+}, {
+    "id": 3,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 3,
+        "type": "Furadeira",
+        "brand": "Black&Decker",
+        "observations": null
+    },
+    "statusLog": [{
+        "id": 7,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RECEIVED",
+        "description": "Equipamento aguardando diagnostico"
+    }, {
+        "id": 8,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "INITIATED",
+        "description": "Danos irreparáveis na estrutura plastica"
+    }, {
+        "id": 9,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "ONHOLD",
+        "description": "Aguardando chegada de nova carcaca, estimativa: 1 dia"
+    }, {
+        "id": 10,
+        "employee": {
+            "id": 1,
+            "name": "Paulo H.",
+            "position": "LEADER"
+        },
+        "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+        "stage": "RESUMED",
+        "description": "Realizando substituicao da carcaca plastica"
+    }],
+    "problemDescription": "Equipamento com avarias na carcaca"
+}]
+```
+	
+- Registrar Ordem de Serviço:
+
+      curl -X POST localhost:8080/serviceOrder -H 'Content-Type: application/json' -d '<new_serviceOrder>'
+      
+##### Modelo de Resposta (retorna objeto criado ``<new_serviceOrder>``):
+      
+```json
+{
+    "id": 4,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 4,
+        "type": "Esmerilhadeira Angular",
+        "brand": "Bosh",
+        "observations": null
+    },
+    "statusLog": [
+        {
+            "id": 11,
+            "employee": {
+                "id": 1,
+                "name": "Paulo H.",
+                "position": "LEADER"
+            },
+            "stageDateTime": "2023-01-25T16:29:54.714+00:00",
+            "stage": "RECEIVED",
+            "description": "Equipamento aguardando diagnostico"
+        }
+    ],
+    "problemDescription": "Equipamento nao liga"
+}
+```
+    
+- Atualizar Ordens de Serviço:
+
+      curl -X PUT localhost:8080/serviceOrders/<id> -H 'Content-Type: application/json' -d '<updated_serviceOrder>'
+      
+##### Modelo de Resposta (``<id>`` = 1):
+      
+```json
+```
+	
+- Atualizar status da Ordem de Serviço:
+
+      curl -X PATCH localhost:8080/serviceOrders/<id> -H 'Content-Type: application/json' -d '<status>'
+      
+##### Modelo de Resposta (``<id>`` = 1):
+      
+```json
+```
+    
+- Deletar Orden de Serviço:
+
+      curl -X DELETE localhost:8080/serviceOrders/<id>
+</details>
 
 ## Tech Stack
 
