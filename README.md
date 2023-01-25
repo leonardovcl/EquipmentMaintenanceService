@@ -140,6 +140,74 @@ Há uma live version da API que pode ser acessada pela url:
 
       curl -X DELETE localhost:8080/customers/<id>
 </details>
+	
+<details>
+	<summary>Funcionários de Manutenção Endpoint</summary>
+    
+- Obter lista de Funcionários cadastrados:
+
+      curl localhost:8080/employees
+      
+##### Modelo de Resposta:
+      
+```json
+[{
+    "id": 1,
+    "name": "Paulo H.",
+    "position": "LEADER"
+}, {
+    "id": 2,
+    "name": "Gabiel H.",
+    "position": "ASSISTANT"
+}]
+```
+
+- Obter Funcionário por Id:
+
+      curl localhost:8080/employees/<id>
+      
+##### Modelo de Resposta (``<id>`` = 1):
+      
+```json
+{
+    "id": 1,
+    "name": "Paulo H.",
+    "position": "LEADER"
+}
+```
+
+- Registrar Funcionário:
+
+      curl -X POST localhost:8080/employees/ -H 'Content-Type: application/json' -d '<new_employee>'
+      
+##### Modelo de Resposta (retorna objeto criado ``<new_employee>``):
+      
+```json
+{
+    "id": 3,
+    "name": "Jose D.",
+    "position": "PRINCIPAL"
+}
+```
+    
+- Atualizar Funcionário:
+
+      curl -X PUT localhost:8080/employees/<id> -H 'Content-Type: application/json' -d '<updated_employee>'
+      
+##### Modelo de Resposta (``<id>`` = 2):
+      
+```json
+{
+    "id": 2,
+    "name": "Paulo H. J.",
+    "position": "LEADER"
+}
+```
+    
+- Deletar Funcionário:
+
+      curl -X DELETE localhost:8080/employees/<id>
+</details>
 
 ## Tech Stack
 
