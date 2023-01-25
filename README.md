@@ -37,11 +37,85 @@ Há uma live version da API que pode ser acessada pela url:
 
     https://ems-rest-api.fly.dev/<endpoint>
 
-## Funcionalidades
+## :hammer: Funcionalidades
 
-:hammer:
+- Cadastro, gerenciamento e consulta de Clientes (url: /customers);
+- Cadastro e gerenciamento de Funcionários de Manutenção (url: /employees);
+- Cadastro, gerenciamento (registro das etapas envolvidos no serviço) e consulta de Ordens de Serviço (url: /serviceOrders).
 
-### Uso
+### :keyboard: Usos
+
+###### Alguns dados são carregados no banco de dados in memory no start up da aplicação para fins de demonstração.
+
+- Obter lista de Clientes cadastrados:
+
+      curl localhost:8080/customers
+      
+##### Modelo de Resposta:
+      
+```json
+[{
+    "id": 1,
+    "name": "Adriana V.",
+    "email": "adrianav@gmail.com",
+    "phoneNumber": "+5541999999901",
+    "address": "R. 01, n. 277"
+}, {
+    "id": 2,
+    "name": "Ricardo L.",
+    "email": "ricardol@gmail.com",
+    "phoneNumber": "+5541999999901",
+    "address": "R. 02, n. 100"
+}]
+```
+
+- Obter Cliente por Id:
+
+      curl localhost:8080/customers/<id>
+      
+##### Modelo de Resposta (``<id>`` = 1):
+      
+```json
+{
+    "id": 1,
+    "name": "Adriana V.",
+    "email": "adrianav@gmail.com",
+    "phoneNumber": "+5541999999901",
+    "address": "R. 01, n. 277"
+}
+```
+
+- Obter Cliente por nome:
+
+      curl localhost:8080/customers/byName/<string>
+      
+##### Modelo de Resposta (``<string>`` = ric):
+      
+```json
+{
+    "id": 2,
+    "name": "Ricardo L.",
+    "email": "ricardol@gmail.com",
+    "phoneNumber": "+5541999999901",
+    "address": "R. 02, n. 100"
+}
+```
+
+- Registrar Cliente:
+
+      curl -X POST localhost:8080/customers/ -H 'Content-Type: application/json' -d '<new_customer>'
+      
+##### Modelo de Resposta (retorna objeto criado ``<new_customer>``):
+      
+```json
+{
+    "id": 3,
+    "name": "Teste01",
+    "email": "teste01@gmail.com",
+    "phoneNumber": "+5541999999900",
+    "address": "R. 00, n. 000"
+}
+```
 
 ## Tech Stack
 
