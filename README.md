@@ -43,6 +43,79 @@ Há uma live version da API que pode ser acessada pela url:
 - Cadastro e gerenciamento de Funcionários de Manutenção (url: /employees);
 - Cadastro, gerenciamento (registro das etapas envolvidos no serviço) e consulta de Ordens de Serviço (url: /serviceOrders).
 
+### :scroll: Modelos das Entidades
+
+<details>
+	<summary>Clientes (Costumers)</summary>
+	
+```json
+{
+    "id": <Long>, #Não utilizar no Cadstramento!
+    "name": <String>,
+    "email": <String>,
+    "phoneNumber": <String>,
+    "address": <String>
+}
+```
+</details>
+	
+<details>
+	<summary>Funcionários (MaintenanceEmployee)</summary>
+	
+```json
+{
+    "id": <Long>, #Não utilizar no Cadstramento!
+    "name": <String>,
+    "position": <Position Enum> #LEADER, PRINCIPAL, ASSISTANT
+}
+```
+</details>
+	
+<details>
+	<summary>Equipamentos (Equipments)</summary>
+	
+```json
+{
+    "id": <Long>, #Não utilizar no Cadstramento!
+    "type": <String>,
+    "brand": <String>,
+    "observations": <String>
+}
+```
+</details>
+	
+<details>
+	<summary>Status (Status)</summary>
+	
+```json
+{
+    "id": <Long>, #Não utilizar no Cadstramento!
+    "employee": <MaintenanceEmployee>,
+    "stageDateTime": <TimeStamp>,
+    "stage": <Stage Enum> #RECEIVED, INITIATED, ONHOLD, RESUMED, FINISHED,
+    "description": <String>
+}
+```
+</details>
+	
+<details>
+	<summary>Ordem de Serviço (ServiceOrder)</summary>
+	
+```json
+{
+    "id": <Long>, #Não utilizar no Cadstramento!,
+    "customer": <Customer>,
+    "equipment": <Equipment>,
+    "statusLog": [
+        <Status>,
+	<Status>,
+	<Status>
+    ],
+    "problemDescription": <String>
+}
+```
+</details>
+
 ### :keyboard: Usos
 
 ###### Alguns dados são carregados no banco de dados in memory no start up da aplicação para fins de demonstração.
@@ -74,9 +147,9 @@ Há uma live version da API que pode ser acessada pela url:
 
 - Obter Cliente por Id:
 
-      curl localhost:8080/customers/<id>
+      curl localhost:8080/customers/<customerId>
       
-##### Modelo de Resposta (``<id>`` = 1):
+##### Modelo de Resposta (``<customerId>`` = 1):
       
 ```json
 {
@@ -108,37 +181,17 @@ Há uma live version da API que pode ser acessada pela url:
 
       curl -X POST localhost:8080/customers/ -H 'Content-Type: application/json' -d '<new_customer>'
       
-##### Modelo de Resposta (retorna objeto criado ``<new_customer>``):
-      
-```json
-{
-    "id": 3,
-    "name": "Teste01",
-    "email": "teste01@gmail.com",
-    "phoneNumber": "+5541999999900",
-    "address": "R. 00, n. 000"
-}
-```
+##### Retorna objeto criado ``<new_customer>``
     
 - Atualizar Cliente:
 
-      curl -X PUT localhost:8080/customers/<id> -H 'Content-Type: application/json' -d '<updated_customer>'
+      curl -X PUT localhost:8080/customers/<customerId> -H 'Content-Type: application/json' -d '<updated_customer>'
       
-##### Modelo de Resposta (``<id>`` = 2):
-      
-```json
-{
-    "id": 2,
-    "name": "Teste02",
-    "email": "ricardol@gmail.com",
-    "phoneNumber": "+5541999999901",
-    "address": "R. 02, n. 100"
-}
-```
+##### Retorna Cliente atualizado ``<updated_customer>``
     
 - Deletar Cliente:
 
-      curl -X DELETE localhost:8080/customers/<id>
+      curl -X DELETE localhost:8080/customers/<customerId>
 </details>
 	
 <details>
@@ -164,9 +217,9 @@ Há uma live version da API que pode ser acessada pela url:
 
 - Obter Funcionário por Id:
 
-      curl localhost:8080/employees/<id>
+      curl localhost:8080/employees/<employeeId>
       
-##### Modelo de Resposta (``<id>`` = 1):
+##### Modelo de Resposta (``<employeeId>`` = 1):
       
 ```json
 {
@@ -180,33 +233,17 @@ Há uma live version da API que pode ser acessada pela url:
 
       curl -X POST localhost:8080/employees/ -H 'Content-Type: application/json' -d '<new_employee>'
       
-##### Modelo de Resposta (retorna objeto criado ``<new_employee>``):
-      
-```json
-{
-    "id": 3,
-    "name": "Jose D.",
-    "position": "PRINCIPAL"
-}
-```
+##### Retorna objeto criado ``<new_employee>``
     
 - Atualizar Funcionário:
 
-      curl -X PUT localhost:8080/employees/<id> -H 'Content-Type: application/json' -d '<updated_employee>'
+      curl -X PUT localhost:8080/employees/<employeeId> -H 'Content-Type: application/json' -d '<updated_employee>'
       
-##### Modelo de Resposta (``<id>`` = 2):
-      
-```json
-{
-    "id": 2,
-    "name": "Paulo H. J.",
-    "position": "LEADER"
-}
-```
+##### Retorna Funcionário atualizado ``<updated_employee>``
     
 - Deletar Funcionário:
 
-      curl -X DELETE localhost:8080/employees/<id>
+      curl -X DELETE localhost:8080/employees/<employeeId>
 </details>
 	
 <details>
@@ -375,9 +412,9 @@ Há uma live version da API que pode ser acessada pela url:
 
 - Obter Ordens de Serviço por Id:
 
-      curl localhost:8080/serviceOrders/<id>
+      curl localhost:8080/serviceOrders/<serviceOrderId>
       
-##### Modelo de Resposta (``<id>`` = 1):
+##### Modelo de Resposta (``<serviceOrderId>`` = 1):
       
 ```json
 {
@@ -432,9 +469,9 @@ Há uma live version da API que pode ser acessada pela url:
 
 - Obter Ordens de Serviço por Id do Cliente:
 
-      curl localhost:8080/serviceOrders/customer/<id>
+      curl localhost:8080/serviceOrders/customer/<customerId>
       
-##### Modelo de Resposta (``<id>`` = 2):
+##### Modelo de Resposta (``<customerId>`` = 2):
       
 ```json
 [{
@@ -546,9 +583,9 @@ Há uma live version da API que pode ser acessada pela url:
 
 - Obter Ordens de Serviço por estágio do serviço:
 
-      curl localhost:8080/serviceOrders/stage?stageName=<stage>
+      curl localhost:8080/serviceOrders/stage?stageName=<Stage Enum>
       
-##### Modelo de Resposta (``<stage>`` = onhold):
+##### Modelo de Resposta (``<Stage Enum>`` = onhold):
       
 ```json
 [{
@@ -605,7 +642,7 @@ Há uma live version da API que pode ser acessada pela url:
 
       curl localhost:8080/serviceOrders/pending
       
-##### Modelo de Resposta (``<stage>`` = onhold):
+##### Modelo de Resposta:
       
 ```json
 [{
@@ -719,173 +756,19 @@ Há uma live version da API que pode ser acessada pela url:
 
       curl -X POST localhost:8080/serviceOrder -H 'Content-Type: application/json' -d '<new_serviceOrder>'
       
-##### Modelo de Resposta (retorna objeto criado ``<new_serviceOrder>``):
-      
-```json
-{
-    "id": 4,
-    "customer": {
-        "id": 2,
-        "name": "Ricardo L.",
-        "email": "ricardol@gmail.com",
-        "phoneNumber": "+5541999999901",
-        "address": "R. 02, n. 100"
-    },
-    "equipment": {
-        "id": 4,
-        "type": "Esmerilhadeira Angular",
-        "brand": "Bosh",
-        "observations": null
-    },
-    "statusLog": [
-        {
-            "id": 11,
-            "employee": {
-                "id": 1,
-                "name": "Paulo H.",
-                "position": "LEADER"
-            },
-            "stageDateTime": "2023-01-25T16:29:54.714+00:00",
-            "stage": "RECEIVED",
-            "description": "Equipamento aguardando diagnostico"
-        }
-    ],
-    "problemDescription": "Equipamento nao liga"
-}
-```
+##### Retorna objeto criado ``<new_serviceOrder>``
     
 - Atualizar Ordens de Serviço:
 
-      curl -X PUT localhost:8080/serviceOrders/<id> -H 'Content-Type: application/json' -d '<updated_serviceOrder>'
+      curl -X PUT localhost:8080/serviceOrders/<serviceOrderId> -H 'Content-Type: application/json' -d '<updated_serviceOrder>'
       
-##### Modelo de Resposta (``<id>`` = 1):
-      
-```json
-{
-    "id": 1,
-    "customer": {
-        "id": 1,
-        "name": "Adriana V.",
-        "email": "adrianav@gmail.com",
-        "phoneNumber": "+5541999999901",
-        "address": "R. 01, n. 277"
-    },
-    "equipment": {
-        "id": 1,
-        "type": "Compressor de Ar",
-        "brand": "Vonder",
-        "observations": null
-    },
-    "statusLog": [
-        {
-            "id": 1,
-            "employee": {
-                "id": 2,
-                "name": "Gabiel H.",
-                "position": "ASSISTANT"
-            },
-            "stageDateTime": "2023-01-25T17:54:48.440+00:00",
-            "stage": "RECEIVED",
-            "description": "Equipamento aguardando diagnostico"
-        },
-        {
-            "id": 2,
-            "employee": {
-                "id": 2,
-                "name": "Gabiel H.",
-                "position": "ASSISTANT"
-            },
-            "stageDateTime": "2023-01-25T17:54:48.440+00:00",
-            "stage": "INITIATED",
-            "description": "Testes de vazamentos falharam, iniciando reparos na lataria"
-        },
-        {
-            "id": 3,
-            "employee": {
-                "id": 1,
-                "name": "Paulo H.",
-                "position": "LEADER"
-            },
-            "stageDateTime": "2023-01-25T17:54:48.440+00:00",
-            "stage": "FINISHED",
-            "description": "Reparo finalizado, Equipamento em funcionamento normal"
-        }
-    ],
-    "problemDescription": "Equipamento nao esta conseguindo realizar a compressao e apresenta ruidos"
-}
-```
+##### Retorna Ordem de Serviço atualizada ``<updated_serviceOrder>``
 	
-- Atualizar status da Ordem de Serviço:
+- Atualizar Status da Ordem de Serviço:
 
-      curl -X PATCH localhost:8080/serviceOrders/<id> -H 'Content-Type: application/json' -d '<status>'
+      curl -X PATCH localhost:8080/serviceOrders/<serviceOrderId> -H 'Content-Type: application/json' -d '<Status>'
       
-##### Modelo de Resposta (``<id>`` = 2):
-      
-```json
-{
-    "id": 2,
-    "customer": {
-        "id": 2,
-        "name": "Ricardo L.",
-        "email": "ricardol@gmail.com",
-        "phoneNumber": "+5541999999901",
-        "address": "R. 02, n. 100"
-    },
-    "equipment": {
-        "id": 2,
-        "type": "Esmerilhadeira Angular",
-        "brand": "Bosh",
-        "observations": null
-    },
-    "statusLog": [
-        {
-            "id": 4,
-            "employee": {
-                "id": 1,
-                "name": "Paulo H.",
-                "position": "LEADER"
-            },
-            "stageDateTime": "2023-01-25T18:02:16.478+00:00",
-            "stage": "RECEIVED",
-            "description": "Equipamento aguardando diagnostico"
-        },
-        {
-            "id": 5,
-            "employee": {
-                "id": 2,
-                "name": "Gabiel H.",
-                "position": "ASSISTANT"
-            },
-            "stageDateTime": "2023-01-25T18:02:16.478+00:00",
-            "stage": "INITIATED",
-            "description": "Testes de circuitos eletronicos falharam"
-        },
-        {
-            "id": 6,
-            "employee": {
-                "id": 2,
-                "name": "Gabiel H.",
-                "position": "ASSISTANT"
-            },
-            "stageDateTime": "2023-01-25T18:02:16.478+00:00",
-            "stage": "ONHOLD",
-            "description": "Aguardando chegada de capacitor para substituicao, estimativa: 3 dias"
-        },
-        {
-            "id": 11,
-            "employee": {
-                "id": 2,
-                "name": "Gabiel H.",
-                "position": "ASSISTANT"
-            },
-            "stageDateTime": "2023-01-25T18:02:20.502+00:00",
-            "stage": "FINISHED",
-            "description": "Equipamento reparado"
-        }
-    ],
-    "problemDescription": "Equipamento nao liga"
-}
-```
+##### Retorna Ordem de Serviço (id = <serviceOrderId>) com statusLog atualizado.
     
 - Deletar Orden de Serviço:
 
