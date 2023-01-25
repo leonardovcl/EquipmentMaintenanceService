@@ -15,23 +15,23 @@
 
 :arrows_counterclockwise: API REST desenvolvida para auxiliar no controle de todas as etapas de execução de um serviço de manutenção de equipamentos.
 
-## Testes
+## :clipboard: Testes
 
     ./mvnw test
 
-## Como executar
+## :gear: Como executar
 
-### Localmente 
+### :computer: Localmente 
 
     ./mvnw package
     java -jar target/EquipmentMaintenanceService-0.0.1-SNAPSHOT.jar
 
-#### Via Docker
+#### :whale: Docker
 
     docker pull ghcr.io/leonardovcl/ems-api:latest
     docker run -p 8080:8080 ghcr.io/leonardovcl/ems-api:latest
 
-### Remoto
+### :satellite: Remoto
 
 Há uma live version da API que pode ser acessada pela url:
 
@@ -54,7 +54,9 @@ Equipment Maintenance Service API foi construído como API REST em Java com o fr
 ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![SpringBoot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
 
-Os dados são armazenados em um banco de dados in memory H2. Persistência e a validação são realizadas com Hibernate (através do Spring Data).
+Os dados são armazenados em um banco de dados in memory H2.
+
+Persistência e a validação são realizadas com Hibernate (através do Spring Data).
 
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 
