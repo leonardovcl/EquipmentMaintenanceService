@@ -761,15 +761,130 @@ Há uma live version da API que pode ser acessada pela url:
 ##### Modelo de Resposta (``<id>`` = 1):
       
 ```json
+{
+    "id": 1,
+    "customer": {
+        "id": 1,
+        "name": "Adriana V.",
+        "email": "adrianav@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 01, n. 277"
+    },
+    "equipment": {
+        "id": 1,
+        "type": "Compressor de Ar",
+        "brand": "Vonder",
+        "observations": null
+    },
+    "statusLog": [
+        {
+            "id": 1,
+            "employee": {
+                "id": 2,
+                "name": "Gabiel H.",
+                "position": "ASSISTANT"
+            },
+            "stageDateTime": "2023-01-25T17:54:48.440+00:00",
+            "stage": "RECEIVED",
+            "description": "Equipamento aguardando diagnostico"
+        },
+        {
+            "id": 2,
+            "employee": {
+                "id": 2,
+                "name": "Gabiel H.",
+                "position": "ASSISTANT"
+            },
+            "stageDateTime": "2023-01-25T17:54:48.440+00:00",
+            "stage": "INITIATED",
+            "description": "Testes de vazamentos falharam, iniciando reparos na lataria"
+        },
+        {
+            "id": 3,
+            "employee": {
+                "id": 1,
+                "name": "Paulo H.",
+                "position": "LEADER"
+            },
+            "stageDateTime": "2023-01-25T17:54:48.440+00:00",
+            "stage": "FINISHED",
+            "description": "Reparo finalizado, Equipamento em funcionamento normal"
+        }
+    ],
+    "problemDescription": "Equipamento nao esta conseguindo realizar a compressao e apresenta ruidos"
+}
 ```
 	
 - Atualizar status da Ordem de Serviço:
 
       curl -X PATCH localhost:8080/serviceOrders/<id> -H 'Content-Type: application/json' -d '<status>'
       
-##### Modelo de Resposta (``<id>`` = 1):
+##### Modelo de Resposta (``<id>`` = 2):
       
 ```json
+{
+    "id": 2,
+    "customer": {
+        "id": 2,
+        "name": "Ricardo L.",
+        "email": "ricardol@gmail.com",
+        "phoneNumber": "+5541999999901",
+        "address": "R. 02, n. 100"
+    },
+    "equipment": {
+        "id": 2,
+        "type": "Esmerilhadeira Angular",
+        "brand": "Bosh",
+        "observations": null
+    },
+    "statusLog": [
+        {
+            "id": 4,
+            "employee": {
+                "id": 1,
+                "name": "Paulo H.",
+                "position": "LEADER"
+            },
+            "stageDateTime": "2023-01-25T18:02:16.478+00:00",
+            "stage": "RECEIVED",
+            "description": "Equipamento aguardando diagnostico"
+        },
+        {
+            "id": 5,
+            "employee": {
+                "id": 2,
+                "name": "Gabiel H.",
+                "position": "ASSISTANT"
+            },
+            "stageDateTime": "2023-01-25T18:02:16.478+00:00",
+            "stage": "INITIATED",
+            "description": "Testes de circuitos eletronicos falharam"
+        },
+        {
+            "id": 6,
+            "employee": {
+                "id": 2,
+                "name": "Gabiel H.",
+                "position": "ASSISTANT"
+            },
+            "stageDateTime": "2023-01-25T18:02:16.478+00:00",
+            "stage": "ONHOLD",
+            "description": "Aguardando chegada de capacitor para substituicao, estimativa: 3 dias"
+        },
+        {
+            "id": 11,
+            "employee": {
+                "id": 2,
+                "name": "Gabiel H.",
+                "position": "ASSISTANT"
+            },
+            "stageDateTime": "2023-01-25T18:02:20.502+00:00",
+            "stage": "FINISHED",
+            "description": "Equipamento reparado"
+        }
+    ],
+    "problemDescription": "Equipamento nao liga"
+}
 ```
     
 - Deletar Orden de Serviço:
