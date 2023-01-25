@@ -86,6 +86,8 @@ public class MaintenanceEmployeeController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 		
+		updatedMaintenanceEmployee.setId(employeeId);
+		
 		return new ResponseEntity<>(maintenanceEmployeeRepository.save(updatedMaintenanceEmployee), HttpStatus.OK);
 	}
 	

@@ -54,7 +54,6 @@ public class EquipmentMaintenanceServiceApplication {
         	Equipment equipment03 = new Equipment("Furadeira", "Black&Decker");
         	
         	ServiceOrder serviceOrder01 = new ServiceOrder(customer01, equipment01, "Equipamento nao esta conseguindo realizar a compressao");
-        	equipment01.setServiceOrder(serviceOrder01);
         	
         	List<Status> statusLog01 = new ArrayList<>(Arrays.asList(
         				new Status(serviceOrder01, employee02, Stage.RECEIVED, "Equipamento aguardando diagnostico"),
@@ -65,7 +64,6 @@ public class EquipmentMaintenanceServiceApplication {
         	serviceOrder01.setStatusLog(statusLog01);
         	
         	ServiceOrder serviceOrder02 = new ServiceOrder(customer02, equipment02, "Equipamento nao liga");
-        	equipment02.setServiceOrder(serviceOrder02);
         	
         	List<Status> statusLog02 = new ArrayList<>(Arrays.asList(
         				new Status(serviceOrder02, employee01, Stage.RECEIVED, "Equipamento aguardando diagnostico"),
@@ -76,7 +74,6 @@ public class EquipmentMaintenanceServiceApplication {
         	serviceOrder02.setStatusLog(statusLog02);
         	
         	ServiceOrder serviceOrder03 = new ServiceOrder(customer02, equipment03, "Equipamento com avarias na carcaca");
-        	equipment03.setServiceOrder(serviceOrder03);
         	
         	List<Status> statusLog03 = new ArrayList<>(Arrays.asList(
         				new Status(serviceOrder03, employee01, Stage.RECEIVED, "Equipamento aguardando diagnostico"),

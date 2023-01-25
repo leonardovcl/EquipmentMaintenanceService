@@ -45,17 +45,12 @@ public class ServiceOrderRepositoryIntegrationTest {
         Equipment equipment03 = new Equipment("Type03", "Brand03");
 		
 		ServiceOrder serviceOrder01 = new ServiceOrder(customer01, equipment01, "Problem Description01");
-		equipment01.setServiceOrder(serviceOrder01);
         entityManager.persist(serviceOrder01);
-        entityManager.flush();
         
         ServiceOrder serviceOrder02 = new ServiceOrder(customer01, equipment02, "Problem Description02");
-        equipment02.setServiceOrder(serviceOrder02);
     	entityManager.persist(serviceOrder02);
-        entityManager.flush();
         
         ServiceOrder serviceOrder03 = new ServiceOrder(customer02, equipment03, "Problem Description03");
-        equipment03.setServiceOrder(serviceOrder03);
     	entityManager.persist(serviceOrder03);
         entityManager.flush();
 

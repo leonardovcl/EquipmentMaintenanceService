@@ -102,6 +102,8 @@ public class CustomerController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 		
+		updatedCustomer.setId(customerId);
+		
 		return new ResponseEntity<>(customerRepository.save(updatedCustomer), HttpStatus.OK);
 	}
 	

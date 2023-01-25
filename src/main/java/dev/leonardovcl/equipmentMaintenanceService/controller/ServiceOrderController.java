@@ -1,5 +1,6 @@
 package dev.leonardovcl.equipmentMaintenanceService.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -157,6 +158,8 @@ public class ServiceOrderController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 		
+		updatedServiceOrder.setId(serviceOrderId);
+		
 		return new ResponseEntity<>(serviceOrderRepository.save(updatedServiceOrder), HttpStatus.OK);
 	}
 	
@@ -173,10 +176,14 @@ public class ServiceOrderController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 		
-		List<Status> newStatusLog = serviceOrder.get().getStatusLog();
+		ServiceOrder updatedServiceOrder = serviceOrder.get();
+		
+		List<Status> newStatusLog = updatedServiceOrder.getStatusLog() != null ? updatedServiceOrder.getStatusLog() : new ArrayList<>();
+		
+		status.setServiceOrder(updatedServiceOrder);
 		newStatusLog.add(status);
 		
-		ServiceOrder updatedServiceOrder = serviceOrder.get();
+		
 		updatedServiceOrder.setStatusLog(newStatusLog);
 		
 		return new ResponseEntity<>(serviceOrderRepository.save(updatedServiceOrder), HttpStatus.OK);
