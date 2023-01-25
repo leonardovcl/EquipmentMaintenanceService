@@ -15,6 +15,40 @@
 :small_blue_diamond:
 [Autores](#autores)
 
+# Como executar
+
+## Localmente
+
+### 
+
+### Via Docker
+
+
+## Remoto
+
+Há uma live version da API que pode ser acessada pela url:
+
+# Funcionalidades
+
+:hammer:
+
+### Uso
+
+# Tech Stack
+
+[⬆ Topo](#)
+:small_blue_diamond:
+
+Equipment Maintenance Service API foi construído como API REST em Java com o framework Spring (Spring Boot & Spring Data).
+
+![Java](https://res.cloudinary.com/practicaldev/image/fetch/s--KR6jSVNe--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://img.shields.io/badge/Java-ED8B00%3Fstyle%3Dfor-the-badge%26logo%3Djava%26logoColor%3Dwhite)
+![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![SpringBoot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
+
+Os dados são armazenados em um banco de dados in memory H2. Persistência e a validação são realizadas com Hibernate (através do Spring Data).
+
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
+
 # Histórico
 
 [⬆ Topo](#)
