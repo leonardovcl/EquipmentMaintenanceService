@@ -3,8 +3,6 @@
 ![license](https://img.shields.io/github/license/leonardovcl/sweet-control)
 ![status](https://img.shields.io/static/v1?label=status&message=Developing&color=red)
 
-:arrows_counterclockwise: API REST desenvolvida para auxiliar no controle de todas as etapas de execução de um serviço de manutenção de equipamentos.
-
 [Overview](#features)
 :small_blue_diamond:
 [Tech Stack](#tech-stack)
@@ -15,26 +13,37 @@
 :small_blue_diamond:
 [Autores](#autores)
 
-# Como executar
+:arrows_counterclockwise: API REST desenvolvida para auxiliar no controle de todas as etapas de execução de um serviço de manutenção de equipamentos.
 
-## Localmente
+## Testes
 
-### 
+    ./mvnw test
 
-### Via Docker
+## Como executar
 
+### Localmente 
 
-## Remoto
+    ./mvnw package
+    java -jar target/EquipmentMaintenanceService-0.0.1-SNAPSHOT.jar
+
+#### Via Docker
+
+    docker pull ghcr.io/leonardovcl/ems-api:latest
+    docker run -p 8080:8080 ghcr.io/leonardovcl/ems-api:latest
+
+### Remoto
 
 Há uma live version da API que pode ser acessada pela url:
 
-# Funcionalidades
+    https://ems-rest-api.fly.dev/<endpoint>
+
+## Funcionalidades
 
 :hammer:
 
 ### Uso
 
-# Tech Stack
+## Tech Stack
 
 [⬆ Topo](#)
 :small_blue_diamond:
@@ -49,7 +58,7 @@ Os dados são armazenados em um banco de dados in memory H2. Persistência e a v
 
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 
-# Histórico
+## Histórico
 
 [⬆ Topo](#)
 :small_blue_diamond:
@@ -57,7 +66,7 @@ Os dados são armazenados em um banco de dados in memory H2. Persistência e a v
 * 0.1.0
     * Primeira versão estável.
 
-# Roadmap
+## Roadmap
 
 [⬆ Topo](#)
 :small_blue_diamond:
@@ -76,7 +85,7 @@ Features:
 - [ ] Atualizações do andamento em tempo real enviadas para e-mails cadastrados;
 - [ ] Geração de relatórios.
 
-# Licença
+## Licença
 
 [⬆ Topo](#)
 :small_blue_diamond:
@@ -84,7 +93,7 @@ Features:
 Licenciado sob os termos da licença MIT.
 Veja [LICENSE](https://github.com/leonardovcl/EquipmentMaintenanceService/blob/main/LICENSE) para mais informações.
 
-# Autores
+## Autores
 
 [⬆ Topo](#)
 :small_blue_diamond:
