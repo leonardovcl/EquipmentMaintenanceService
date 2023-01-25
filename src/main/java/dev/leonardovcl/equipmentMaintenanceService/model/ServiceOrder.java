@@ -9,10 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -25,10 +25,9 @@ public class ServiceOrder {
 	@ManyToOne
 	@NotNull(message = "Must not be Null!")
 	private Customer customer;
-	
-	@OneToOne(mappedBy = "serviceOrder", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	@NotNull(message = "Must not be Null!")
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "equipment_id")
 	private Equipment equipment;
 	
 	@OneToMany(mappedBy = "serviceOrder", cascade = CascadeType.ALL)

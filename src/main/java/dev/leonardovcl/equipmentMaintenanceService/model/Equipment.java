@@ -1,27 +1,17 @@
 package dev.leonardovcl.equipmentMaintenanceService.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Equipment {
 
 	@Id
-    @Column(name = "serviceOrder_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
-	@OneToOne
-	@MapsId
-    @JoinColumn(name = "serviceOrder_id")
-	@JsonIgnore
-//	@NotNull(message = "Must not be Null!")
-	private ServiceOrder serviceOrder;
 	
 	@NotEmpty(message = "Must not be Empty!")
 	private String type;
@@ -52,14 +42,6 @@ public class Equipment {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public ServiceOrder getServiceOrder() {
-		return serviceOrder;
-	}
-
-	public void setServiceOrder(ServiceOrder serviceOrder) {
-		this.serviceOrder = serviceOrder;
 	}
 
 	public String getType() {

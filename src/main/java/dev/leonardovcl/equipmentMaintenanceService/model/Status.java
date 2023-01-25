@@ -26,7 +26,6 @@ public class Status {
 	
 	@ManyToOne
 	@JsonIgnore
-//	@NotNull(message = "Must not be Null!")
 	private ServiceOrder serviceOrder;
 	
 	@ManyToOne
