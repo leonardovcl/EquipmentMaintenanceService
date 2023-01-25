@@ -24,6 +24,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +33,7 @@ import dev.leonardovcl.equipmentMaintenanceService.model.Customer;
 import dev.leonardovcl.equipmentMaintenanceService.model.repository.CustomerRepository;
 
 @WebMvcTest(CustomerController.class)
+@ActiveProfiles("test")
 public class CustomerControllerTest {
 
 	@Autowired
@@ -108,6 +110,45 @@ public class CustomerControllerTest {
 					.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound()
 			);
+	}
+	
+	@Test
+	public void givenCustomersWithNameLike_shouldReturnOk_WhenGetCustomersByNameLike() throws Exception {
+	
+		List<Customer> customerList = Arrays.asList(
+				new Customer(1L, "Teste01", "teste01@gmail.com", "+5541999999901", "R. 01"),
+				new Customer(2L, "Teste02", "teste02@gmail.com", "+5541999999902", "R. 02"),
+				new Customer(3L, "Teste03", "teste03@gmail.com", "+5541999999903", "R. 03"));
+		
+		PagedListHolder<Customer> customerPageListHolder = new PagedListHolder<>(customerList);
+		customerPageListHolder.setPageSize(5);
+		customerPageListHolder.setPage(0);
+		
+		Page<Customer> customerPage = new PageImpl<>(customerPageListHolder.getPageList(), PageRequest.of(0, 5), customerList.size());
+		
+		Mockito.when(customerRepository.findByNameContainingIgnoreCase("teste",PageRequest.of(0, 5))).thenReturn(customerPage);
+		
+		mockMvc.perform(
+					get("/customers/byName/{likePattern}", "teste")
+						.contentType(MediaType.APPLICATION_JSON))
+					.andExpect(status().isOk())
+					.andExpect(jsonPath("$", hasSize(3)))
+					.andExpect(jsonPath("$[2].name", is("Teste03"))
+				);
+	}
+	
+	@Test
+	public void givenNoCustomersWithNameLike_shouldReturnNotFound_WhenGetCustomersByNameLike() throws Exception {
+	
+		Page<Customer> customerPage = Page.empty();
+		
+		Mockito.when(customerRepository.findByNameContainingIgnoreCase("teste",PageRequest.of(0, 5))).thenReturn(customerPage);
+		
+		mockMvc.perform(
+				get("/customers/byName/{likePattern}", "teste")
+						.contentType(MediaType.APPLICATION_JSON))
+					.andExpect(status().isNotFound()
+				);
 	}
 	
 	@Test
