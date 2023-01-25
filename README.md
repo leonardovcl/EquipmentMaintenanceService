@@ -3,9 +3,17 @@
 ![license](https://img.shields.io/github/license/leonardovcl/sweet-control)
 ![status](https://img.shields.io/static/v1?label=status&message=Developing&color=red)
 
-[Overview](#features)
+[Testes](#testes)
+:small_blue_diamond:
+[Executar](#como-executar)
+:small_blue_diamond:
+[Modelo Entidades](#modelos-das-entidades)
+:small_blue_diamond:
+[Como Usar](#como-usar)
 :small_blue_diamond:
 [Tech Stack](#tech-stack)
+:small_blue_diamond:
+[Histórico](#histórico)
 :small_blue_diamond:
 [Roadmap](#roadmap)
 :small_blue_diamond:
@@ -15,11 +23,11 @@
 
 :arrows_counterclockwise: API REST desenvolvida para auxiliar no controle de todas as etapas de execução de um serviço de manutenção de equipamentos.
 
-## :clipboard: Testes
+## Testes
 
     ./mvnw test
 
-## :gear: Como executar
+## Como executar
 
 ### :computer: Localmente 
 
@@ -39,11 +47,27 @@ Há uma live version da API que pode ser acessada pela url:
 
 ## :hammer: Funcionalidades
 
+[⬆ Topo](#)
+:small_blue_diamond:
+[Testes](#testes)
+:small_blue_diamond:
+[Executar](#como-executar)
+:small_blue_diamond:
+[Tech Stack](#tech-stack)
+:small_blue_diamond:
+[Histórico](#histórico)
+:small_blue_diamond:
+[Roadmap](#roadmap)
+:small_blue_diamond:
+[Licença](#licença)
+:small_blue_diamond:
+[Autores](#autores)
+
 - Cadastro, gerenciamento e consulta de Clientes (url: /customers);
 - Cadastro e gerenciamento de Funcionários de Manutenção (url: /employees);
 - Cadastro, gerenciamento (registro das etapas envolvidos no serviço) e consulta de Ordens de Serviço (url: /serviceOrders).
 
-### :scroll: Modelos das Entidades
+### Modelos das Entidades
 
 <details>
 	<summary>Clientes (Costumers)</summary>
@@ -116,7 +140,7 @@ Há uma live version da API que pode ser acessada pela url:
 ```
 </details>
 
-### :keyboard: Usos
+### Como Usar
 
 ###### Alguns dados são carregados no banco de dados in memory no start up da aplicação para fins de demonstração.
 
@@ -779,6 +803,21 @@ Há uma live version da API que pode ser acessada pela url:
 
 [⬆ Topo](#)
 :small_blue_diamond:
+[Testes](#testes)
+:small_blue_diamond:
+[Executar](#como-executar)
+:small_blue_diamond:
+[Modelo Entidades](#modelos-das-entidades)
+:small_blue_diamond:
+[Como Usar](#como-usar)
+:small_blue_diamond:
+[Histórico](#histórico)
+:small_blue_diamond:
+[Roadmap](#roadmap)
+:small_blue_diamond:
+[Licença](#licença)
+:small_blue_diamond:
+[Autores](#autores)
 
 Equipment Maintenance Service API foi construído como API REST em Java com o framework Spring (Spring Boot & Spring Data).
 
@@ -796,6 +835,21 @@ Persistência e a validação são realizadas com Hibernate (através do Spring 
 
 [⬆ Topo](#)
 :small_blue_diamond:
+[Testes](#testes)
+:small_blue_diamond:
+[Executar](#como-executar)
+:small_blue_diamond:
+[Modelo Entidades](#modelos-das-entidades)
+:small_blue_diamond:
+[Como Usar](#como-usar)
+:small_blue_diamond:
+[Tech Stack](#tech-stack)
+:small_blue_diamond:
+[Roadmap](#roadmap)
+:small_blue_diamond:
+[Licença](#licença)
+:small_blue_diamond:
+[Autores](#autores)
 
 * 0.1.0
     * Primeira versão estável.
@@ -804,6 +858,21 @@ Persistência e a validação são realizadas com Hibernate (através do Spring 
 
 [⬆ Topo](#)
 :small_blue_diamond:
+[Testes](#testes)
+:small_blue_diamond:
+[Executar](#como-executar)
+:small_blue_diamond:
+[Modelo Entidades](#modelos-das-entidades)
+:small_blue_diamond:
+[Como Usar](#como-usar)
+:small_blue_diamond:
+[Tech Stack](#tech-stack)
+:small_blue_diamond:
+[Histórico](#histórico)
+:small_blue_diamond:
+[Licença](#licença)
+:small_blue_diamond:
+[Autores](#autores)
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão focadas nas seguintes tarefas:
 
@@ -824,6 +893,21 @@ Features:
 
 [⬆ Topo](#)
 :small_blue_diamond:
+	[Testes](#testes)
+:small_blue_diamond:
+[Executar](#como-executar)
+:small_blue_diamond:
+[Modelo Entidades](#modelos-das-entidades)
+:small_blue_diamond:
+[Como Usar](#como-usar)
+:small_blue_diamond:
+[Tech Stack](#tech-stack)
+:small_blue_diamond:
+[Histórico](#histórico)
+:small_blue_diamond:
+[Roadmap](#roadmap)
+:small_blue_diamond:
+[Autores](#autores)
 
 Licenciado sob os termos da licença MIT.
 Veja [LICENSE](https://github.com/leonardovcl/EquipmentMaintenanceService/blob/main/LICENSE) para mais informações.
@@ -832,6 +916,21 @@ Veja [LICENSE](https://github.com/leonardovcl/EquipmentMaintenanceService/blob/m
 
 [⬆ Topo](#)
 :small_blue_diamond:
+[Testes](#testes)
+:small_blue_diamond:
+[Executar](#como-executar)
+:small_blue_diamond:
+[Modelo Entidades](#modelos-das-entidades)
+:small_blue_diamond:
+[Como Usar](#como-usar)
+:small_blue_diamond:
+[Tech Stack](#tech-stack)
+:small_blue_diamond:
+[Histórico](#histórico)
+:small_blue_diamond:
+[Roadmap](#roadmap)
+:small_blue_diamond:
+[Licença](#licença)
 
 :heavy_check_mark: 
 **Leonardo Viana**
