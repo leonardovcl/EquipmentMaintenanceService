@@ -17,6 +17,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+* Represents a Service Order Status.
+* 
+* @author Leonardo Viana
+*/
 @Entity
 public class Status {
 

@@ -12,6 +12,11 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+* Represents a Maintenance Employee.
+* 
+* @author Leonardo Viana
+*/
 @Entity
 public class MaintenanceEmployee {
 

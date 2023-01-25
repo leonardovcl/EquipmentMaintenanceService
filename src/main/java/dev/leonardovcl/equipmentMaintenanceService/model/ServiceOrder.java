@@ -15,6 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+/**
+* Represents a Service Order.
+* 
+* @author Leonardo Viana
+*/
 @Entity
 public class ServiceOrder {
 

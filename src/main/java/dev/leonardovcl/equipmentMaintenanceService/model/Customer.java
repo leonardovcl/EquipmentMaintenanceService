@@ -12,6 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
+/**
+* Represents a Customer.
+* 
+* @author Leonardo Viana
+*/
 @Entity
 public class Customer {
 	

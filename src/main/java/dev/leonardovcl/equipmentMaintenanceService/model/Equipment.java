@@ -6,6 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
+/**
+* Represents an Equipment.
+* 
+* @author Leonardo Viana
+*/
 @Entity
 public class Equipment {
 
