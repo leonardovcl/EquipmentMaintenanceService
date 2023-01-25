@@ -813,6 +813,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão fo
 - [ ] Implementar usuários para controle de acesso e pemissão de uso de métodos;
 - [ ] Implementar autenticação via JWT;
 - [ ] Substituir banco de dados H2 in memory por outro banco de dados relacional;
+- [ ] Tratamento de exceções nas chamadas aos repositories.
 
 Features:
 
