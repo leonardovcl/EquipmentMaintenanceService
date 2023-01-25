@@ -41,6 +41,12 @@ public class ServiceOrder {
 		
 	}
 
+	public ServiceOrder(Customer customer, Equipment equipment, String problemDescription) {
+		this.customer = customer;
+		this.equipment = equipment;
+		this.problemDescription = problemDescription;
+	}
+	
 	public ServiceOrder(Long id, Customer customer, Equipment equipment, String problemDescription) {
 		this.id = id;
 		this.customer = customer;

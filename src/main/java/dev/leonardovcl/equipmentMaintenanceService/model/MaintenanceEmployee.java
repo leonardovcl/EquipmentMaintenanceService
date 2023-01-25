@@ -36,6 +36,11 @@ public class MaintenanceEmployee {
 		
 	}
 
+	public MaintenanceEmployee(String name, Position position) {
+		this.name = name;
+		this.position = position;
+	}
+	
 	public MaintenanceEmployee(Long id, String name, Position position) {
 		this.id = id;
 		this.name = name;

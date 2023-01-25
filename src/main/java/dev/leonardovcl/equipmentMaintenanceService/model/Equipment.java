@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Equipment {
@@ -18,6 +19,7 @@ public class Equipment {
 	@OneToOne
 	@MapsId
     @JoinColumn(name = "serviceOrder_id")
+	@JsonIgnore
 //	@NotNull(message = "Must not be Null!")
 	private ServiceOrder serviceOrder;
 	
@@ -31,6 +33,11 @@ public class Equipment {
 
 	public Equipment() {
 		
+	}
+	
+	public Equipment(String type, String brand) {
+		this.type = type;
+		this.brand = brand;
 	}
 	
 	public Equipment(Long id, String type, String brand) {
