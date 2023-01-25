@@ -24,6 +24,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,6 +34,7 @@ import dev.leonardovcl.equipmentMaintenanceService.model.MaintenanceEmployee.Pos
 import dev.leonardovcl.equipmentMaintenanceService.model.repository.MaintenanceEmployeeRepository;
 
 @WebMvcTest(MaintenanceEmployeeController.class)
+@ActiveProfiles("test")
 public class MaintenanceEmployeeControllerTest {
 
 	@Autowired
