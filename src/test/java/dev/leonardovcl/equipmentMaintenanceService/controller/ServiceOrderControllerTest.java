@@ -26,6 +26,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,6 +42,7 @@ import dev.leonardovcl.equipmentMaintenanceService.model.repository.ServiceOrder
 import dev.leonardovcl.equipmentMaintenanceService.service.ServiceOrderService;
 
 @WebMvcTest(ServiceOrderController.class)
+@ActiveProfiles("test")
 public class ServiceOrderControllerTest {
 
 	@Autowired
@@ -95,6 +97,47 @@ public class ServiceOrderControllerTest {
 	}
 	
 	@Test
+	public void givenServiceOrdersByCustomer_shouldReturnOk_WhenGetServiceOrdersByCustomerId() throws Exception {
+	
+		Customer customer = new Customer(1L, "Teste01", "teste01@gmail.com", "+5541999999901", "R. 01");
+		
+		List<ServiceOrder> serviceOrderList = Arrays.asList(
+				new ServiceOrder(1L, customer, new Equipment(1L, "Type01", "Brand01"), "Problem Description01"),
+				new ServiceOrder(2L, customer, new Equipment(2L, "Type02", "Brand02"), "Problem Description02"),
+				new ServiceOrder(3L, customer, new Equipment(3L, "Type03", "Brand03"), "Problem Description03"));
+		
+		PagedListHolder<ServiceOrder> serviceOrderPageListHolder = new PagedListHolder<>(serviceOrderList);
+		serviceOrderPageListHolder.setPageSize(5);
+		serviceOrderPageListHolder.setPage(0);
+		
+		Page<ServiceOrder> serviceOrderPage = new PageImpl<>(serviceOrderPageListHolder.getPageList(), PageRequest.of(0, 5), serviceOrderList.size());
+		
+		Mockito.when(serviceOrderRepository.findByCustomerId(1L,PageRequest.of(0, 5))).thenReturn(serviceOrderPage);
+		
+		mockMvc.perform(
+					get("/serviceOrders/customer/{customerId}",1L)
+						.contentType(MediaType.APPLICATION_JSON))
+					.andExpect(status().isOk())
+					.andExpect(jsonPath("$", hasSize(3)))
+					.andExpect(jsonPath("$[1].id", is(2))
+				);
+	}
+	
+	@Test
+	public void givenNoServiceOrdersByCustomer_shouldReturnNotFound_WhenGetServiceOrderByCustomerId() throws Exception {
+	
+		Page<ServiceOrder> serviceOrdersPage = Page.empty();
+		
+		Mockito.when(serviceOrderRepository.findByCustomerId(1L,PageRequest.of(0, 5))).thenReturn(serviceOrdersPage);
+		
+		mockMvc.perform(
+					get("/serviceOrders/customer/{customerId}",1L)
+						.contentType(MediaType.APPLICATION_JSON))
+					.andExpect(status().isNotFound()
+				);
+	}
+	
+	@Test
 	public void givenExistingServiceOrder_shouldReturnOk_whenGetServiceOrderById() throws Exception {
 		
 		ServiceOrder serviceOrder = new ServiceOrder(1L, new Customer(1L, "Teste01", "teste01@gmail.com", "+5541999999901", "R. 01"), new Equipment(1L, "Type01", "Brand01"), "Problem Description01");
@@ -123,7 +166,7 @@ public class ServiceOrderControllerTest {
 	}
 	
 	@Test
-	public void givenPendingServiceOrders_shouldReturnOk_WhenGetSPendingServiceOrders() throws Exception {
+	public void givenPendingServiceOrders_shouldReturnOk_WhenGetPendingServiceOrders() throws Exception {
 	
 		ServiceOrder serviceOrder01 = new ServiceOrder(
 				1L,
@@ -141,7 +184,7 @@ public class ServiceOrderControllerTest {
 		
 		List<Status> statusLog01 = Arrays.asList(
 					new Status(1L, serviceOrder01, new MaintenanceEmployee(), Stage.RECEIVED, "Description01"),
-					new Status(2L, serviceOrder01, new MaintenanceEmployee(), Stage.INITIADED, "Description02"),
+					new Status(2L, serviceOrder01, new MaintenanceEmployee(), Stage.INITIATED, "Description02"),
 					new Status(3L, serviceOrder01, new MaintenanceEmployee(), Stage.ONHOLD, "Description03"),
 					new Status(4L, serviceOrder01, new MaintenanceEmployee(), Stage.RESUMED, "Description04")
 				);
@@ -150,7 +193,7 @@ public class ServiceOrderControllerTest {
 		
 		List<Status> statusLog02 = Arrays.asList(
 				new Status(1L, serviceOrder02, new MaintenanceEmployee(), Stage.RECEIVED, "Description01"),
-				new Status(2L, serviceOrder02, new MaintenanceEmployee(), Stage.INITIADED, "Description02")
+				new Status(2L, serviceOrder02, new MaintenanceEmployee(), Stage.INITIATED, "Description02")
 			);
 	
 		serviceOrder02.setStatusLog(statusLog02);
@@ -169,12 +212,70 @@ public class ServiceOrderControllerTest {
 	}
 	
 	@Test
-	public void givenNoPendingerviceOrders_shouldReturnNotFound_WhenGetPendingServiceOrders() throws Exception {
+	public void givenNoPendingServiceOrders_shouldReturnNotFound_WhenGetPendingServiceOrders() throws Exception {
 	
 		Mockito.when(serviceOrderService.findByPendingStatus()).thenReturn(new ArrayList<ServiceOrder>());
 		
 		mockMvc.perform(
 					get("/serviceOrders/pending")
+						.contentType(MediaType.APPLICATION_JSON))
+					.andExpect(status().isNotFound()
+				);
+	}
+	
+	@Test
+	public void givenServiceOrdersWithStageLastInStatusLog_shouldReturnOk_WhenGetServiceOrdersByLastStage() throws Exception {
+	
+		ServiceOrder serviceOrder01 = new ServiceOrder(
+				1L,
+				new Customer(1L, "Teste01", "teste01@gmail.com", "+5541999999901", "R. 01"),
+				new Equipment(1L, "Type01", "Brand01"),
+				"Problem Description01"
+		);
+		
+		ServiceOrder serviceOrder02 = new ServiceOrder(
+				2L,
+				new Customer(1L, "Teste012", "teste02@gmail.com", "+5541999999902", "R. 02"),
+				new Equipment(1L, "Type02", "Brand02"),
+				"Problem Description02"
+		);
+		
+		List<Status> statusLog01 = Arrays.asList(
+					new Status(1L, serviceOrder01, new MaintenanceEmployee(), Stage.RECEIVED, "Description01"),
+					new Status(2L, serviceOrder01, new MaintenanceEmployee(), Stage.INITIATED, "Description02"),
+					new Status(3L, serviceOrder01, new MaintenanceEmployee(), Stage.ONHOLD, "Description03"),
+					new Status(4L, serviceOrder01, new MaintenanceEmployee(), Stage.RESUMED, "Description04")
+				);
+		
+		serviceOrder01.setStatusLog(statusLog01);
+		
+		List<Status> statusLog02 = Arrays.asList(
+				new Status(1L, serviceOrder02, new MaintenanceEmployee(), Stage.RECEIVED, "Description01"),
+				new Status(2L, serviceOrder02, new MaintenanceEmployee(), Stage.INITIATED, "Description02")
+			);
+	
+		serviceOrder02.setStatusLog(statusLog02);
+		
+		List<ServiceOrder> serviceOrderList = Arrays.asList(serviceOrder01, serviceOrder02);
+		
+		Mockito.when(serviceOrderService.findByLastStatus(Stage.INITIATED)).thenReturn(serviceOrderList);
+		
+		mockMvc.perform(
+					get("/serviceOrders/stage?stageName=initiated")
+						.contentType(MediaType.APPLICATION_JSON))
+					.andExpect(status().isOk())
+					.andExpect(jsonPath("$", hasSize(2)))
+					.andExpect(jsonPath("$[1].id", is(2))
+				);
+	}
+	
+	@Test
+	public void givenNoServiceOrdersWithStageLastInStatusLog_shouldReturnNotFound_WhenGetServiceOrdersByLastStage() throws Exception {
+	
+		Mockito.when(serviceOrderService.findByLastStatus(Stage.FINISHED)).thenReturn(new ArrayList<ServiceOrder>());
+		
+		mockMvc.perform(
+					get("/serviceOrders/stage?stageName=finished")
 						.contentType(MediaType.APPLICATION_JSON))
 					.andExpect(status().isNotFound()
 				);
@@ -268,7 +369,7 @@ public class ServiceOrderControllerTest {
 		
 		List<Status> statusLog = new ArrayList<>(Arrays.asList(
 					new Status(1L, serviceOrder, new MaintenanceEmployee(2L, "Teste02", Position.ASSISTANT), Stage.RECEIVED, "Description01"),
-					new Status(2L, serviceOrder, new MaintenanceEmployee(2L, "Teste02", Position.ASSISTANT), Stage.INITIADED, "Description02")
+					new Status(2L, serviceOrder, new MaintenanceEmployee(2L, "Teste02", Position.ASSISTANT), Stage.INITIATED, "Description02")
 				));
 		
 		serviceOrder.setStatusLog(statusLog);
