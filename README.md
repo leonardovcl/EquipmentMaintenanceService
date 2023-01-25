@@ -47,6 +47,9 @@ Há uma live version da API que pode ser acessada pela url:
 
 ###### Alguns dados são carregados no banco de dados in memory no start up da aplicação para fins de demonstração.
 
+<details>
+	<summary>Clientes Endpoint</summary>
+    
 - Obter lista de Clientes cadastrados:
 
       curl localhost:8080/customers
@@ -116,6 +119,27 @@ Há uma live version da API que pode ser acessada pela url:
     "address": "R. 00, n. 000"
 }
 ```
+    
+- Atualizar Cliente:
+
+      curl -X PUT localhost:8080/customers/<id> -H 'Content-Type: application/json' -d '<updated_customer>'
+      
+##### Modelo de Resposta (``<id>`` = 2):
+      
+```json
+{
+    "id": 2,
+    "name": "Teste02",
+    "email": "ricardol@gmail.com",
+    "phoneNumber": "+5541999999901",
+    "address": "R. 02, n. 100"
+}
+```
+    
+- Deletar Cliente:
+
+      curl -X DELETE localhost:8080/customers/<id>
+</details>
 
 ## Tech Stack
 
